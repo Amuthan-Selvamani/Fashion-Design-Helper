@@ -1,0 +1,25 @@
+body {
+    background: linear-gradient(135deg, #f3f9ff, #b3cde8);
+}
+
+h2 {
+    color: #4A90E2;
+}
+
+.dress-buttons button {
+    background-color: #6ca0dc;
+}
+
+.dress-buttons button:hover {
+    background-color: #5083c4;
+}
+input{
+    display: none;
+}
+.male1{
+    width: fit-content;
+
+}
+.container{
+    width: 600px;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Female Character Customization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Page Background */
+        body {
+            background-color: #ffc0cb; /* Soft pink background */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header */
+        h2 {
+            font-size: 2.5em;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        /* Character Image */
+        img {
+            width: 200px;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00000033;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Button Styling */
+        .dress-buttons button,
+        label,
+        #color-picker {
+            background-color: #ff69b4; /* Bright pink */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            margin: 15px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%; /* Full width for consistency */
+            max-width: 180px;
+        }
+
+        .dress-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Hover Effect */
+        label:hover, .dress-buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hide File Input */
+        #input-file {
+            display: none;
+        }
+
+        /* Color Picker Styling */
+        .color-picker-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Customize Female Character</h2>
+    <img class="female1" src="https://i.pinimg.com/736x/2b/71/e2/2b71e22a6fce5706a46e0b6b728a8544.jpg" id="profile-pic" alt="character">
+    <label style="margin-left: 16.5vh;" for="input-file">Upload Image</label>
+    <input accept="image/jpeg,image/png,image/jpg" id="input-file">
+    <div class="dress-buttons">
+        <button>Dress 1</button>  
+        <button>Dress 2</button>
+        <button>Dress 3</button>
+    </div>
+
+    <div class="color-picker-container">
+        <label for="color-picker">Choose Color</label>
+        <input type="color" id="color-picker">
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    const $characterImage = $('#profile-pic');
+
+    function changeDress(dressNumber) {
+        $characterImage.css('transform', 'scale(1.1)');
+        setTimeout(() => $characterImage.css('transform', 'scale(1)'), 200);
+
+        // Placeholder images for each dress (replace these links with actual images)
+        $characterImage.attr('src', `https://via.placeholder.com/160x200?text=Dress+${dressNumber}`);
+    }
+
+    // Function to change color using box shadow
+    function changeColor(color) {
+        $characterImage.css('box-shadow', `0 0 15px ${color}`);
+    }
+
+    // Event Listeners
+    $('.dress-buttons button').on('click', function() {
+        const dressNumber = $(this).text().split(' ')[1]; // Extract dress number from button text
+        changeDress(dressNumber);
+    });
+
+    $('#color-picker').on('change', function() {
+        const color = $(this).val();
+        changeColor(color);
+    });
+});
+
+// Script to handle profile picture upload
+let profilePic = document.getElementById("profile-pic");
+let inputFile = document.getElementById("input-file");
+
+inputFile.onchange = function() {
+    if (inputFile.files && inputFile.files[0]) {
+        profilePic.src = URL.createObjectURL(inputFile.files[0]);
+    }
+};
+</script>
+
+</body>
+</html>

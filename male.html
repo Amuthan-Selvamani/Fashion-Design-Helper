@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Male Character Customization</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="male.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Customize Male Character</h2>
+    <img class="male1" src="https://i.pinimg.com/564x/53/43/37/534337cb3b7dcf6d752e7e6f54057486.jpg" id="profile-pic" alt="character">
+    <label for="input-file">Upload Image</label>
+    <input type="file" accept="image/jpeg,image/png,image/jpg" id="input-file">
+    <div class="dress-buttons">
+        <button>Dress 1</button>  
+        <button>Dress 2</button>
+        <button>Dress 3</button>
+    </div>
+
+    <div class="color-picker-container">
+        <label for="color-picker">Choose Color</label>
+        <input type="color" id="color-picker">
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    const $characterImage = $('#profile-pic');
+
+    function changeDress(dressNumber) {
+        $characterImage.css('transform', 'scale(1.1)');
+        setTimeout(() => $characterImage.css('transform', 'scale(1)'), 200);
+
+        // Placeholder images for each dress (replace these links with actual images)
+        $characterImage.attr('src', `https://via.placeholder.com/160x200?text=Dress+${dressNumber}`);
+    }
+
+    // Function to change color using box shadow
+    function changeColor(color) {
+        $characterImage.css('box-shadow', `0 0 15px ${color}`);
+    }
+
+    // Event Listeners
+    $('.dress-buttons button').on('click', function() {
+        const dressNumber = $(this).text().split(' ')[1]; // Extract dress number from button text
+        changeDress(dressNumber);
+    });
+
+    $('#color-picker').on('change', function() {
+        const color = $(this).val();
+        changeColor(color);
+    });
+});
+</script>
+
+<script>
+let profilePic = document.getElementById("profile-pic");
+let inputFile = document.getElementById("input-file");
+
+inputFile.onchange = function(){
+    profilePic.src = URL.createObjectURL(inputFile.files[0]);
+}
+</script>
+
+</body>
+</html>
